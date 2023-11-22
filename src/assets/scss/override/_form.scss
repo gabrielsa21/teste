@@ -39,41 +39,6 @@ select.form-control:not([size]):not([multiple]) {
   background-position: right calc(0.375em + 0.9rem) center;
 }
 
-.form-control.creditcard {
-  background-position: 98%;
-  background-repeat: no-repeat;
-  background-size: 40px;
-  padding-right: 60px;
-
-  &.visa {
-    background-image: url('../../images/cards/visa.png');
-  }
-
-  &.americanexpress {
-    background-image: url('../../images/cards/americanexpress.png');
-  }
-
-  &.dinersclub {
-    background-image: url('../../images/cards/dinersclub.png');
-  }
-
-  &.discover {
-    background-image: url('../../images/cards/discover.png');
-  }
-
-  &.jcb {
-    background-image: url('../../images/cards/jcb.png');
-  }
-
-  &.mastercard {
-    background-image: url('../../images/cards/mastercard.png');
-  }
-
-  &.visa {
-    background-image: url('../../images/cards/visa.png');
-  }
-}
-
 .form-group {
   margin-bottom: 25px;
 

@@ -456,7 +456,9 @@ body.layout-3 {
       color: #000;
 
       .header-logo {
-        height: 30px;
+        width: 100%;
+        padding: 14px;
+        margin-bottom: 10px;
       }
 
       .logo-name {

@@ -1,6 +1,13 @@
 <nav class="navbar navbar-expand-lg main-navbar sticky">
   <div class="form-inline me-auto">
-
+    <ul class="navbar-nav msr-3">
+      <li>
+        <a data-toggle="sidebar" class="nav-link nav-link-lg
+									collapse-btn" (click)="mobileMenuSidebarOpen($event,'overlay-open')">
+          <i-feather name="menu"></i-feather>
+        </a>
+      </li>
+    </ul>
   </div>
   <ul class="navbar-nav navbar-right">
     <li ngbDropdown><a ngbDropdownToggle data-toggle="dropdown"
