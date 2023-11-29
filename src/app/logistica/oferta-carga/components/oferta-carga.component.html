@@ -1,0 +1,77 @@
+<section class="main-content">
+  <ul class="breadcrumb breadcrumb-style ">
+    <li class="breadcrumb-item">
+      <h5 class="page-title m-b-0">Realiza oferta carga</h5>
+    </li>
+    <li class="breadcrumb-item bcrumb-1">
+      <a routerLink="/dashboard/main">
+        <i class="fas fa-home font-17"></i></a>
+    </li>
+    <li class="breadcrumb-item">Gerencia liquidação</li>
+    <li class="breadcrumb-item">Realiza oferta carga</li>
+  </ul>
+  <div class="section-body">
+    <div class="row">
+      <div class="col-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            <mat-icon (click)="goToBack()" class="cursor-pointer mr-5 arrow-back">arrow_back</mat-icon>
+            Voltar para Gerenciamento de liquidação
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="d-flex" [formGroup]="form">
+                  <mat-form-field appearance="outline">
+                    <mat-label>DT. Vencimento</mat-label>
+                    <input formControlName="dataVencimento" matInput [matDatepicker]="picker1">
+                    <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex space-between">
+            <input placeholder="Pesquisar" type="text" class="form-control w-25 ml-25" (keyup)='updateFilter($event)'>
+            <button [disabled]="form.invalid || selection.selected.length == 0" (click)="submit()" class="mr-20" mat-fab extended color="primary">
+              <mat-icon>done</mat-icon>
+              OFERTAR
+            </button>
+          </div>
+          <table mat-table [dataSource]="dataSource">
+            <ng-container matColumnDef="selecione">
+              <th mat-header-cell *matHeaderCellDef>
+                <mat-checkbox (change)="$event ? toggleAllRows() : null"
+                  [checked]="selection.hasValue() && isAllSelected()"
+                  [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+                </mat-checkbox>
+              </th>
+              <td mat-cell *matCellDef="let row">
+                <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                  [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+                </mat-checkbox>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="codigo">
+              <th mat-header-cell *matHeaderCellDef> Código </th>
+              <td mat-cell *matCellDef="let element"> {{element.idtransportador}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="nomeTrasportador">
+              <th mat-header-cell *matHeaderCellDef> Nome do transportador </th>
+              <td mat-cell *matCellDef="let element"> {{element.nometransportador}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>

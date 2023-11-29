@@ -1,1 +1,55 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { 
+    --mdc-checkbox-disabled-selected-icon-color: rgba(0, 0, 0, 0.38);
+    --mdc-checkbox-disabled-unselected-icon-color: rgba(0, 0, 0, 0.38);
+    --mdc-checkbox-selected-checkmark-color: #fff;
+    --mdc-checkbox-selected-focus-icon-color: #20B2AA !important;
+    --mdc-checkbox-selected-hover-icon-color: #20B2AA !important;
+    --mdc-checkbox-selected-icon-color: #20B2AA !important;
+    --mdc-checkbox-selected-pressed-icon-color: #20B2AA !important;
+    --mdc-checkbox-unselected-focus-icon-color: #212121;
+    --mdc-checkbox-unselected-hover-icon-color: #212121;
+    --mdc-checkbox-unselected-icon-color: rgba(0, 0, 0, 0.54);
+    --mdc-checkbox-unselected-pressed-icon-color: rgba(0, 0, 0, 0.54);
+    --mdc-checkbox-selected-focus-state-layer-color: #20B2AA !important;
+    --mdc-checkbox-selected-hover-state-layer-color: #20B2AA !important;
+    --mdc-checkbox-selected-pressed-state-layer-color: #20B2AA !important;
+    --mdc-checkbox-unselected-focus-state-layer-color: black;
+    --mdc-checkbox-unselected-hover-state-layer-color: black;
+    --mdc-checkbox-unselected-pressed-state-layer-color: black;
+    
+    height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-mdc-radio-button.mat-accent {
+    --mdc-radio-disabled-selected-icon-color: #000;
+    --mdc-radio-disabled-unselected-icon-color: #000;
+    --mdc-radio-unselected-hover-icon-color: #212121;
+    --mdc-radio-unselected-icon-color: rgba(0, 0, 0, 0.54);
+    --mdc-radio-unselected-pressed-icon-color: rgba(0, 0, 0, 0.54);
+    --mdc-radio-selected-focus-icon-color: white;
+    --mdc-radio-selected-hover-icon-color: white;
+    --mdc-radio-selected-icon-color: white;
+    --mdc-radio-selected-pressed-icon-color: white;
+    --mat-radio-ripple-color: #000;
+    --mat-radio-checked-ripple-color: white;
+    --mat-radio-disabled-label-color: rgba(0, 0, 0, 0.38);
+}
+
+.ngx-datatable.fixed-header .datatable-header .datatable-header-inner .datatable-header-cell {
+    background-color: #20B2AA !important;
+    color: white !important;
+}
+
+.ngx-datatable.material .datatable-body .datatable-body-row .datatable-body-cell {
+    border: solid #20B2AA thin;
+    border-bottom-width: inherit;
+    border-right-style: none;
+    border-left-style: none;
+}
+
+.page-title {
+    font-size: 18px !important;
+    font-weight: 500 !important;
+}

@@ -37,29 +37,19 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'realizacao-oferta-carga/:id',
+        loadChildren: () =>
+          import('./logistica/oferta-carga/oferta-carga.module').then(
+            (m) => m.OfertaCargaModule
+          ),
+      },
+      {
         path: 'gera-liquidacao',
         loadChildren: () =>
           import('./logistica/gera-liquidacao/gera-liquidacao.module').then(
             (m) => m.GeraLiquidacaoModule
           ),
-      },
-      {
-        path: 'componentes-para-uso/advance-table',
-        loadChildren: () =>
-          import('./componentes-para-uso/advance-table/advance-table.module').then(
-            (m) => m.AdvanceTableModule
-          ),
-      },
-      {
-        path: 'componentes-para-uso/data-tables',
-        loadChildren: () =>
-          import('./componentes-para-uso/data-tables/data-tables.module').then((m) => m.DataTablesModule),
-      },
-      {
-        path: 'componentes-para-uso/tables',
-        loadChildren: () =>
-          import('./componentes-para-uso/tables/tables.module').then((m) => m.TablesModule),
-      },
+      }
     ]
   },
   {

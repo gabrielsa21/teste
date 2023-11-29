@@ -1,0 +1,121 @@
+<div mat-dialog-content>
+  <table mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="numNF">
+      <th mat-header-cell *matHeaderCellDef> Num.NF. </th>
+      <td mat-cell *matCellDef="let element"> {{element.numnf | date: 'dd/MM/yyyy'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="dtNF">
+      <th mat-header-cell *matHeaderCellDef> Dt.NF </th>
+      <td mat-cell *matCellDef="let element"> {{element.dtnf}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="dtAgendada">
+      <th mat-header-cell *matHeaderCellDef> Dt.Agendada </th>
+      <td mat-cell *matCellDef="let element"> {{element.dtag}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="cdCli">
+      <th mat-header-cell *matHeaderCellDef> Cd.Cli </th>
+      <td mat-cell *matCellDef="let element"> {{element.idcli }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="razaoSocial">
+      <th mat-header-cell *matHeaderCellDef> Razão social </th>
+      <td mat-cell *matCellDef="let element"> {{element.razaosocial }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="vlrTotal">
+      <th mat-header-cell *matHeaderCellDef> Vlr.Total </th>
+      <td mat-cell *matCellDef="let element"> {{element.vlrtotalnota | currency:' ' }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="peso">
+      <th mat-header-cell *matHeaderCellDef> Peso </th>
+      <td mat-cell *matCellDef="let element"> {{element.peso | currency:' ' }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="qtdCaixa">
+      <th mat-header-cell *matHeaderCellDef> Qtd.Caixa </th>
+      <td mat-cell *matCellDef="let element"> {{element.qtdcaixa | currency:' ' }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="numPed">
+      <th mat-header-cell *matHeaderCellDef> Num.Ped. </th>
+      <td mat-cell *matCellDef="let element"> {{element.numped }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="codCid">
+      <th mat-header-cell *matHeaderCellDef> Cod.Cid. </th>
+      <td mat-cell *matCellDef="let element"> {{element.idcidade }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="cidade">
+      <th mat-header-cell *matHeaderCellDef> Cidade </th>
+      <td mat-cell *matCellDef="let element"> {{element.nomecidade }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="operacao">
+      <th mat-header-cell *matHeaderCellDef> Operação </th>
+      <td mat-cell *matCellDef="let element"> {{element.tipo }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="prazo">
+      <th mat-header-cell *matHeaderCellDef> Prazo </th>
+      <td mat-cell *matCellDef="let element"> {{element.prazonota }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="obs">
+      <th mat-header-cell *matHeaderCellDef> Obs </th>
+      <td mat-cell *matCellDef="let element"> {{element.obs }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="obsLogistica">
+      <th mat-header-cell *matHeaderCellDef> Obs.Logistica </th>
+      <td mat-cell *matCellDef="let element"> {{element.obslogistica }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="pedidoCompra">
+      <th mat-header-cell *matHeaderCellDef> Pedido de compra </th>
+      <td mat-cell *matCellDef="let element"> {{element.pedidocompra }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="dtEntrega">
+      <th mat-header-cell *matHeaderCellDef> Dt.Entrega </th>
+      <td mat-cell *matCellDef="let element">
+        <button (click)="dialogimagem.showModal()" color="primary" mat-mini-fab>
+          <mat-icon>description</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>OK</button>
+</div>
+
+<!-- Temporario -->
+<!-- ******************************************************************************************************* -->
+<dialog #dialogimagem style="width: 50%;" title="Imagem da nota fiscal">
+  <div class="pt-12 table-responsive mt-10 table-bordered table-striped">
+
+    <body>
+      <h1>Imagem da nota fiscal</h1>
+      <img style="width: 100%; border: 1px solid #fff; border-radius: 0px; box-shadow: none;"
+        src={{imagemNotaFiscal}} />
+    </body>
+
+  </div>
+  <div>
+    <P></P>
+    <div class="action-buttons">
+      <button #btndialog id="btndialog" class="btn-primary btn-lg" (click)="dialogimagem.close()">OK
+
+      </button>
+    </div>
+  </div>
+</dialog>
+<!-- ******************************************************************************************************* -->

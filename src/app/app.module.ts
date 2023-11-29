@@ -28,6 +28,7 @@ import {
   HttpClient,
 } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -66,6 +67,7 @@ export function createTranslateLoader(http: HttpClient) {
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },
+    {provide: MAT_DATE_LOCALE, useValue: 'pt-br'},
   ],
   bootstrap: [AppComponent],
 })

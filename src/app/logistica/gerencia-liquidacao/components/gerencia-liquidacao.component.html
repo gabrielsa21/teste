@@ -15,10 +15,204 @@
       <div class="col-12 col-md-12 col-lg-12">
         <div class="card">
           <div class="card-header">
-            <h4>Card titulo</h4>
+            <h4>Relatório gerencial agrupado por liquidação</h4>
           </div>
           <div class="card-body">
-            <!-- Add content here -->
+
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group row" [formGroup]="form">
+                    <div class="col-sm-6">
+                      <div class="d-flex">
+                        <mat-form-field appearance="outline" class="mr-10">
+                          <mat-label>DT. Inicial</mat-label>
+                          <input formControlName="dataInicial" matInput [matDatepicker]="picker1">
+                          <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+                          <mat-datepicker #picker1></mat-datepicker>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                          <mat-label>DT. Final</mat-label>
+                          <input formControlName="dataFinal" matInput [matDatepicker]="picker2">
+                          <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+                          <mat-datepicker #picker2></mat-datepicker>
+                        </mat-form-field>
+                      </div>
+
+                      <div class="d-flex">
+                        <mat-form-field appearance="outline" class="mr-10">
+                          <mat-label>DT.Ag.Inicial</mat-label>
+                          <input formControlName="dataAGInicial" matInput [matDatepicker]="picker3">
+                          <mat-datepicker-toggle matIconSuffix [for]="picker3"></mat-datepicker-toggle>
+                          <mat-datepicker #picker3></mat-datepicker>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                          <mat-label>DT.Ag.Final</mat-label>
+                          <input formControlName="dataAGFinal" matInput [matDatepicker]="picker4">
+                          <mat-datepicker-toggle matIconSuffix [for]="picker4"></mat-datepicker-toggle>
+                          <mat-datepicker #picker4></mat-datepicker>
+                        </mat-form-field>
+                      </div>
+
+
+                      <div class="d-flex">
+                        <mat-form-field appearance="outline" class="mr-10">
+                          <mat-label>DT.Car.Inicial</mat-label>
+                          <input formControlName="dataCARInicial" matInput [matDatepicker]="picker5">
+                          <mat-datepicker-toggle matIconSuffix [for]="picker5"></mat-datepicker-toggle>
+                          <mat-datepicker #picker5></mat-datepicker>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                          <mat-label>DT.Car.Final</mat-label>
+                          <input formControlName="dataCARFinal" matInput [matDatepicker]="picker6">
+                          <mat-datepicker-toggle matIconSuffix [for]="picker6"></mat-datepicker-toggle>
+                          <mat-datepicker #picker6></mat-datepicker>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <label class="bold">Situação liquidacão:</label>
+                      <ng-select formControlName="situacao" [items]="dataSelect" [multiple]="true" [closeOnSelect]="false" [searchable]="false"
+                        bindLabel="nomesituacao" placeholder="Selecione">
+                      </ng-select>
+
+                      <div class="form-group option mt-20">
+                        <label class="d-block">Opções:</label>
+                        <mat-radio-group formControlName="option" class="form-check">
+                          <mat-radio-button value="1"><span class="bold">CIF</span></mat-radio-button>
+                          <mat-radio-button value="2"><span class="bold">FOP</span></mat-radio-button>
+                          <mat-radio-button value="3"><span class="bold">TODOS</span></mat-radio-button>
+                        </mat-radio-group>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="d-flex space-between">
+                    <input placeholder="Pesquisar" type="text" class="form-control w-25" (keyup)='updateFilter($event)'>
+                    <button [disabled]="form.invalid" (click)="submit()" class="bnt-search" mat-fab extended
+                    color="primary">
+                    <mat-icon>search</mat-icon>
+                    MOSTRAR
+                  </button>
+                </div>
+                  <ngx-datatable #table class="material" [rows]="rows" [loadingIndicator]="loadingIndicator"
+                    [headerHeight]="50" [footerHeight]="50" rowHeight="auto" [limit]="5"
+                    [scrollbarH]="true">
+                    
+                    <ngx-datatable-column name="Água">
+                      <ng-template let-row="row" ngx-datatable-cell-template>
+                        <span class="none">{{setAgua(row.aguasuco)}}</span>
+                        <div [ngClass]="{'bg-green': setAgua(row.aguasuco) == 'DE'}">
+                        </div>
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Tp.Frete">
+                      <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.tpfrete}}
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Dt.Liquid">
+                      <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.datafat}}
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Status liquidacão">
+                      <ng-template let-row="row" ngx-datatable-cell-template>
+                        <button class="bnt-liq-status" (click)="openDialog(row.liquidacao)" mat-stroked-button>{{row.situacaoliquidacao}}</button>
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Liquidacão">
+                      <ng-template let-row="row" ngx-datatable-cell-template>
+                        <button (click)="goToOffer(row.liquidacao, row.dtaentregaagendada, row.tpfrete)" mat-stroked-button>{{row.liquidacao}}</button>
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Nome do cliente">
+                      <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.razaosocial}}
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="NF's">
+                      <ng-template let-row="row" ngx-datatable-cell-template>
+                        <button class="bnt-liq-status" (click)="openNFSDialog(row.liquidacao)" mat-stroked-button>{{row.situacaoliquidacao}}</button>
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Agendamento">
+                      <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.dtaentregaagendada}}
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Carregamento">
+                      <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.carregamento}}
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Peso">
+                      <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.peso}}
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Qt.Caixa">
+                      <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.qtdcaixa}}
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Qt.Item.Liq">
+                      <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.qtditemnf}}
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Palet">
+                      <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.palet}}
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Vlr.Pedido">
+                      <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.vlrpedido}}
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Vlr.Frete">
+                      <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.vlrfrete}}
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Tipo.Veiculo">
+                      <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.tipoveiculo}}
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Qtd.Entregas">
+                      <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.qtdentregas}}
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Transportador">
+                      <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.transportador}}
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Motorista">
+                      <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.motorista}}
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Placa">
+                      <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.placa}}
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Horario">
+                      <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.horario}}
+                      </ng-template>
+                    </ngx-datatable-column>
+                  </ngx-datatable>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
