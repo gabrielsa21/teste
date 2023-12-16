@@ -1,0 +1,90 @@
+<section class="main-content">
+  <ul class="breadcrumb breadcrumb-style ">
+    <li class="breadcrumb-item">
+      <h5 class="page-title m-b-0">Pedidos do cliente</h5>
+    </li>
+    <li class="breadcrumb-item bcrumb-1">
+      <a routerLink="/agendamentos">
+        <i class="fas fa-home font-17"></i></a>
+    </li>
+    <li class="breadcrumb-item">Realizar</li>
+    <li class="breadcrumb-item">Agendamento</li>
+  </ul>
+  <div class="section-body">
+    <div class="row">
+      <div class="col-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-header">
+              <mat-icon (click)="goToBack()" class="cursor-pointer arrow-back">arrow_back</mat-icon>
+              Voltar para Agendamentos
+              <h4 class="ml-30">{{nomeCliente}}</h4>
+            </div>
+            <div class="d-flex space-between">
+              <button [disabled]="selecaoAgendamento.length == 0" (click)="submit()" mat-fab extended color="primary">
+                <mat-icon>done</mat-icon>
+                Confirmar
+              </button>
+            </div>
+          </div>
+          <div class="card-body">
+
+
+            <div class="d-flex w-100 wrap" [formGroup]="form">
+              <div *ngFor="let item of dataList" class="mr-30 mt-10">
+                <div class="card-header card-cliente__header">
+                  Ped {{item.numped}}
+                </div>
+                <div class="card-body card-cliente w-100">
+                  <div class="card-cliente__body">
+                    <p>
+                      Dt.Pedido: <span class="f-size-16">{{item.datapedido}}</span>
+                    </p>
+                    <p>
+                      Liquidacão: <span class="f-size-16">{{item.idliquidacao}}</span>
+                    </p>
+                    <p>
+                      Cidade: <span class="f-size-16">{{item.nomecidade}}</span>
+                    </p>
+                    <p>
+                      Bairro: <span class="f-size-16">{{item.nomebairro}}</span>
+                    </p>
+                    <p>
+                      NF: <span class="f-size-16">{{item.nf}}</span>
+                    </p>
+                    <p>
+                      Vlr.Pedido: <span class="f-size-16">{{item.vlrpedido}}</span>
+                    </p>
+                    <p>
+                      Qtd.Caixa: <span class="f-size-16">{{item.qtdcaixa}}</span>
+                    </p>
+                    <p>
+                      Qtd.Palet: <span class="f-size-16">{{item.palet}}</span>
+                    </p>
+                    <p>
+                      Peso: <span class="f-size-16">{{item.peso}}</span>
+                    </p>
+                    <p>
+                      Tipo Veiculo: <span class="f-size-16">{{item.tipoveiculo}}</span>
+                    </p>
+                    <p>
+                      Numpedcliente: <span class="f-size-16">{{item.numpedcliente}}</span>
+                    </p>
+                  </div>
+                  <input class="date-suggest" #dtsugerida id="dtsugerida" name="dtsugerida"
+                    (change)="getSuggestDate(item.numped, dtsugerida.value)" type="date" />
+
+                  <section class="bg-check">
+                    <mat-checkbox (change)="clienteSelecionado(item, $event)" class="example-margin">
+                      <span class="pr-2">Selecione p/ agendar</span>
+                    </mat-checkbox>
+                  </section>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

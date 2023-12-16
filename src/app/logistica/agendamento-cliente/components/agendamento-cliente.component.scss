@@ -1,0 +1,86 @@
+.card-cliente {
+  position: relative;
+  width: 15%;
+  background-color: black;
+  color: white;
+  border-radius: 0px 0px 7px 7px;
+
+  &__header {
+    width: 15%;
+    background-color: #20B2AA;
+    color: black;
+    font-size: 21px;
+    position: relative;
+    bottom: -1px;
+    width: auto;
+  }
+
+  &__body {
+    color: white;
+
+  }
+}
+
+p {
+  color: white !important;
+  font-weight: 400 !important;
+  line-height: 1.5;
+}
+
+.f-size-16 {
+  font-size: 16px;
+}
+
+.mr-30 {
+  margin-right: 30px;
+}
+
+.ml-30 {
+  margin-left: 30px;
+}
+
+
+.w-100 {
+  width: 100%;
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+.mt-10 {
+  margin-top: 10px;
+}
+
+.mr-10 {
+  margin-right: 10px;
+}
+
+.bg-check {
+  background-color: white;
+  border-radius: 2px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.arrow-back {
+  position: relative;
+  top: -1px !important;
+}
+
+.email-bnt {
+  background-color: #F1F1F1;
+  color: black;
+}
+
+.date-suggest {
+  margin-bottom: 10px;
+  width: 100%;
+  padding: 5px;
+}
+
+.pr-2 {
+  padding-right: 2px;
+}

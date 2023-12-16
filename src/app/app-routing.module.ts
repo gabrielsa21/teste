@@ -2,6 +2,7 @@ import { AuthLayoutComponent } from './layout/app-layout/auth-layout/auth-layout
 import { MainLayoutComponent } from './layout/app-layout/main-layout/main-layout.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { DetalhePedidoClienteModule } from './logistica/detalhe-pedido-cliente/detalhe-pedido-cliente.module';
 const routes: Routes = [
   {
     path: '',
@@ -14,6 +15,20 @@ const routes: Routes = [
           import('./logistica/agendamentos/agendamentos.module').then(
             (m) => m.AgendamentoModule
           ),
+      },
+      {
+        path: 'agendamentos-clientes',
+        loadChildren: () =>
+          import('./logistica/agendamento-cliente/agendamento-cliente.module').then(
+            (m) => m.AgendamentoClienteModule
+          ),
+      },
+      {
+        path: 'detalhes-pedidos-clientes',
+        loadChildren: () => 
+          import('./logistica/detalhe-pedido-cliente/detalhe-pedido-cliente.module').then(
+            (m) => DetalhePedidoClienteModule
+          )
       },
       {
         path: 'frete',

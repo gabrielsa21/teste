@@ -39,11 +39,11 @@ export class GerenciaLiquidacaoService {
     return this._http.get(`${this.DATA_URL}/${dataInicial}/${dataFinal}/${empresa}/${dataAgInicial}/${dataAgFinal}/${dataCarInicial}/${dataCarFinal}/${option}/${filter}`)
   }
 
-  ObtemHistoricoLiq(body: any): Observable<any> {
+  obtemHistoricoLiq(body: any): Observable<any> {
     return this._http.get(`${this.HISTORICO_LIQUIDACAO_URL}/${body.code}/${body.empresa}`);
   }
 
-  ObtemNotasFiscais(body: any): Observable<any> {
+  obtemNotasFiscais(body: any): Observable<any> {
     return this._http.get(`${this.OBTEM_NOTAS_FISCAIS}/${body.code}/${body.empresa}`);
   }
 

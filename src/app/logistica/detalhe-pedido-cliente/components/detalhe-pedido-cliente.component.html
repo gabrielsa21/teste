@@ -1,0 +1,89 @@
+<section class="main-content">
+  <ul class="breadcrumb breadcrumb-style ">
+    <li class="breadcrumb-item">
+      <h5 class="page-title m-b-0">Pedido do cliente</h5>
+    </li>
+    <li class="breadcrumb-item bcrumb-1">
+      <a routerLink="/agendamentos">
+        <i class="fas fa-home font-17"></i></a>
+    </li>
+    <li class="breadcrumb-item">Confirmar</li>
+    <li class="breadcrumb-item">Agendamento</li>
+  </ul>
+  <div class="section-body">
+    <div class="row">
+      <div class="col-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            <mat-icon (click)="goToBack()" class="cursor-pointer arrow-back">arrow_back</mat-icon>
+            Voltar a tela anterior
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group row" [formGroup]="form">
+                  <div class="col-sm-6">
+                    <div class="d-flex">
+                      <mat-form-field appearance="outline" class="mr-20">
+                        <mat-label>Dt.Prev.Carregamento</mat-label>
+                        <input formControlName="dataCarregamento" matInput [matDatepicker]="picker1">
+                        <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker #picker1></mat-datepicker>
+                      </mat-form-field>
+                      <mat-form-field appearance="outline">
+                        <mat-label>Senha</mat-label>
+                        <input formControlName="senha" matInput>
+                      </mat-form-field>
+                    </div>
+                    <button [disabled]="form.invalid" (click)="submit()" class="mr-20" mat-fab extended color="primary">
+                      <mat-icon>done</mat-icon>
+                      Confirmar
+                    </button>
+                    <button (click)="enviarEmail()" [disabled]="form.invalid" class="mr-20 email-bnt" mat-fab extended color="primary">
+                      <mat-icon>email</mat-icon>
+                      E-mail
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <ngx-datatable #table class="material" [rows]="rows" [loadingIndicator]="loadingIndicator"
+              [headerHeight]="50" [footerHeight]="50" rowHeight="auto" [limit]="5" [scrollbarH]="true">
+              <ngx-datatable-column name="Cod.Prod">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                  <span class="none">{{row.idprod}}</span>
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="Descrição" [width]="600">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                  {{row.nomeproduto}}
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="Qtd.Caixa">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                  {{row.qtdcaixa}}
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="Vlr.Pedido">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                  {{row.vlrpedido}}
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="Peso">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                  {{row.peso}}
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="Qtd.Palet">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                  {{row.palet}}
+                </ng-template>
+              </ngx-datatable-column>
+            </ngx-datatable>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

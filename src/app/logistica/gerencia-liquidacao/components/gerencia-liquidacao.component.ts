@@ -54,12 +54,12 @@ export class GerenciaLiquidacaoComponent implements OnInit {
     const form = JSON.parse(isForm);
 
     this.form = this.fb.group({
-      dataInicial: [form.dataInicial ? form.dataInicial : null, Validators.required],
-      dataFinal: [form.dataFinal ? form.dataFinal : null, Validators.required],
-      dataAGInicial: [form.dataAGInicial ? form.dataAGInicial : null],
-      dataAGFinal: [form.dataAGFinal ? form.dataAGFinal : null],
-      dataCARInicial: [form.dataCARInicial ? form.dataCARInicial : null],
-      dataCARFinal: [form.dataCARFinal ? form.dataCARFinal : null],
+      dataInicial: [form?.dataInicial ? form.dataInicial : null, Validators.required],
+      dataFinal: [form?.dataFinal ? form.dataFinal : null, Validators.required],
+      dataAGInicial: [form?.dataAGInicial ? form.dataAGInicial : null],
+      dataAGFinal: [form?.dataAGFinal ? form.dataAGFinal : null],
+      dataCARInicial: [form?.dataCARInicial ? form.dataCARInicial : null],
+      dataCARFinal: [form?.dataCARFinal ? form.dataCARFinal : null],
       option: ['3'],
       situacao: [[]]
     });

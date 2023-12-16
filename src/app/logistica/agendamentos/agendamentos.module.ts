@@ -6,6 +6,12 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { AgendamentoComponent } from './components/agendamentos.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -17,7 +23,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     AgendamentoRoutingModule,
     NgbModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
     ToastrModule.forRoot(),
+    MatNativeDateModule,
+    NgxDatatableModule,
+    MatInputModule,
+    MatIconModule,
+    MatButtonModule
   ],
   providers: [
     ToastrService 

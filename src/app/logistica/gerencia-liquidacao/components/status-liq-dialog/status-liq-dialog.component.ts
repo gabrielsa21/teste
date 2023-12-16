@@ -29,7 +29,7 @@ export class StatusLiqDialogComponent implements OnInit {
       empresa: this.empresa
     };
 
-    this.service.ObtemHistoricoLiq(data).subscribe(res => {
+    this.service.obtemHistoricoLiq(data).subscribe(res => {
       this.dataSource.data = res;
     });
   }

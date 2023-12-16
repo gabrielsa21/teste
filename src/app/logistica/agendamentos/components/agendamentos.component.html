@@ -4,7 +4,7 @@
       <h5 class="page-title m-b-0">Agendamentos</h5>
     </li>
     <li class="breadcrumb-item bcrumb-1">
-      <a routerLink="/dashboard/main">
+      <a routerLink="/agendamentos">
         <i class="fas fa-home font-17"></i></a>
     </li>
     <li class="breadcrumb-item">Logistica</li>
@@ -15,10 +15,137 @@
       <div class="col-12 col-md-12 col-lg-12">
         <div class="card">
           <div class="card-header">
-            <h4>Card titulo</h4>
+            <h4>Agendamento</h4>
           </div>
           <div class="card-body">
-            <!-- Add content here -->
+            <div class="row">
+              <div class="col-sm-12" [formGroup]="form">
+                <div class="form-group row">
+                  <div class="col-sm-6">
+                    <div class="d-flex">
+                      <mat-form-field appearance="outline" class="mr-10">
+                        <mat-label>DT. Inicial</mat-label>
+                        <input formControlName="dataInicial" matInput [matDatepicker]="picker1">
+                        <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker #picker1></mat-datepicker>
+                      </mat-form-field>
+                      <mat-form-field appearance="outline" class="mr-10">
+                        <mat-label>DT. Final</mat-label>
+                        <input formControlName="dataFinal" matInput [matDatepicker]="picker2">
+                        <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2></mat-datepicker>
+                      </mat-form-field>
+                    </div>
+                    <div class="d-flex">
+                      <mat-form-field appearance="outline" class="mr-10">
+                        <mat-label>Cidade</mat-label>
+                        <input matInput placeholder="Cidade" formControlName="cidade">
+                      </mat-form-field>
+                      <mat-form-field appearance="outline">
+                        <mat-label>Cliente</mat-label>
+                        <input matInput placeholder="Cliente" formControlName="cliente">
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex space-between">
+                  <input placeholder="Pesquisar" type="text" class="form-control w-25" (keyup)='updateFilter($event)'>
+                  <button [disabled]="form.invalid" (click)="ObtemPedidos()" class="bnt-search" mat-fab extended
+                    color="primary">
+                    <mat-icon>search</mat-icon>
+                    MOSTRAR
+                  </button>
+                </div>
+                <ngx-datatable #table class="material" [rows]="rows" [loadingIndicator]="loadingIndicator"
+                  [headerHeight]="50" [footerHeight]="50" rowHeight="auto" [limit]="5" [scrollbarH]="true">
+
+                  <ngx-datatable-column name="Cd.Cli">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      <button class="bnt-liq-status" (click)="goToCliente(row)"
+                        mat-stroked-button>{{row.codcli}}</button>
+                    </ng-template>
+                  </ngx-datatable-column>
+
+                  <ngx-datatable-column name="Razão Social">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.razaosocial}}
+                    </ng-template>
+                  </ngx-datatable-column>
+
+                  <ngx-datatable-column name="Nome da Cidade">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.nomecidade}}
+                    </ng-template>
+                  </ngx-datatable-column>
+
+                  <ngx-datatable-column name="Tipo">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.tipo}}
+                    </ng-template>
+                  </ngx-datatable-column>
+
+                  <ngx-datatable-column name="Dt.Pedido">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.datafat}}
+                    </ng-template>
+                  </ngx-datatable-column>
+
+                  <ngx-datatable-column name="Num.Ped">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.numped}}
+                    </ng-template>
+                  </ngx-datatable-column>
+
+                  <ngx-datatable-column name="Peso">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.peso}}
+                    </ng-template>
+                  </ngx-datatable-column>
+
+                  <ngx-datatable-column name="Qtd.Caixa">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.qtdcaixa}}
+                    </ng-template>
+                  </ngx-datatable-column>
+
+                  <ngx-datatable-column name="Qtd.Palet">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.palet}}
+                    </ng-template>
+                  </ngx-datatable-column>
+
+                  <ngx-datatable-column name="Vlr.Pedido">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.vlrpedido}}
+                    </ng-template>
+                  </ngx-datatable-column>
+
+                  <ngx-datatable-column name="Tp.Veiculo">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.tipoveiculo}}
+                    </ng-template>
+                  </ngx-datatable-column>
+
+                  <ngx-datatable-column name="Liquidação">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.idliquidacao}}
+                    </ng-template>
+                  </ngx-datatable-column>
+
+                  <ngx-datatable-column name="Num.Ped.Cli">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.xpedid}}
+                    </ng-template>
+                  </ngx-datatable-column>
+
+                  <ngx-datatable-column name="Observação">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.observacao}}
+                    </ng-template>
+                  </ngx-datatable-column>
+                </ngx-datatable>
+              </div>
+            </div>
           </div>
         </div>
       </div>

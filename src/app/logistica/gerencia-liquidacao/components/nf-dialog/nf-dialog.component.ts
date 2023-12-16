@@ -48,7 +48,7 @@ export class NFDialogComponent implements OnInit {
       empresa: this.empresa
     };
 
-    this.service.ObtemNotasFiscais(data).subscribe(res => {
+    this.service.obtemNotasFiscais(data).subscribe(res => {
       console.log('res', res);
       this.dataSource.data = res;
     });
