@@ -1,0 +1,282 @@
+<section class="main-content">
+  <ul class="breadcrumb breadcrumb-style ">
+    <li class="breadcrumb-item">
+      <h5 class="page-title m-b-0">Calculo de frete</h5>
+    </li>
+    <li class="breadcrumb-item bcrumb-1">
+      <a routerLink="/agendamentos">
+        <i class="fas fa-home font-17"></i></a>
+    </li>
+    <li class="breadcrumb-item">Realizar</li>
+    <li class="breadcrumb-item">Calculo</li>
+  </ul>
+  <div class="section-body">
+    <div class="row">
+      <div class="col-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-header">
+              <mat-icon (click)="goToBack()" class="cursor-pointer arrow-back">arrow_back</mat-icon>
+              Voltar para Fretes
+            </div>
+
+            <button mat-raised-button color="primary" class="mr-10"
+              (click)="(callProdutos(aliquotacreditoimposto.value,r1.checked,r2.checked,r3.checked,r4.checked,vlrporkg.value,vlrfretecontr.value,vlrdescarga.value,vlrdistribuicao.value,percsobretotalnf.value))">Calcular</button>
+            <button style="width: 280px;" mat-raised-button color="primary" (click)="(enviarParaAprovacao(produtos, 
+            r4.checked,
+            '1',
+            carreta.checked,
+            select1.value,
+            aliqimpostopercentual.value,
+            placa.value,
+            aliquotacreditoimposto.value,
+            r1.checked,
+            r2.checked,
+            r3.checked,
+            r4.checked,
+            vlrporkg.value,
+            vlrfretecontr.value,
+            vlrdescarga.value,
+            vlrdistribuicao.value,
+            percsobretotalnf.value))">Enviar para aprovação</button>
+          </div>
+          <div class="card-body">
+            <div class="d-flex justify-content-start">
+              <form>
+                <div class="row" style="text-align: left;">
+                  <div class="card mr-10" style="width: 242px; font-size: 10px;">
+                    <div class="card-body">
+                      <h5 class="card-title">Cálculo do frete</h5>
+                      <div>
+                        <input #r1 type="radio" id="r1" name="rr" checked />
+                        <label class="font-size-12" style="padding: 5px;" type="text" name="lastname">
+                          Por peso
+                        </label>
+                        <input #r2 type="radio" disabled id="r2" name="rr" />
+                        <label class="font-size-12" style="padding: 5px;" type="text" name="lastname">
+                          Tab.frete
+                        </label>
+                      </div>
+                      <div>
+                        <input #r3 type="radio" id="r3" name="rr" />
+                        <label class="font-size-12" style="padding: 5px;" type="text" name="lastname">
+                          Manual
+                        </label>
+                        <input #r4 type="radio" id="r4" name="rr" />
+                        <label class="font-size-12" style="padding: 5px;" type="text" name="lastname">
+                          FOB
+                        </label>
+                      </div>
+                      <div>
+                        <hr>
+                        <label class="font-size-12" type="text" name="lastname">
+                          Vlr. por kg
+                        </label>
+                        <input #vlrporkg name="vlrporkg" size="20" class="mb-0" align="right" value="0.32"
+                          style="width: 45px; margin-left: 5px; font-size: 12px;" disabled pattern="[0-9]+([.][0-9]+)?"
+                          min="0" step="any" placeholder="Informe o valor" type="number" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card mr-10" style="width: 196px; font-size: 10px;">
+                    <div class="card-body">
+                      <h5 class="card-title">Tabela de frete</h5>
+                      <div>
+                        <input style="padding: 10px;" #carreta class="mb-0" type="radio" id="carreta" checked
+                          name="rrr">
+                        <label class="font-size-12" style="padding: 5px;" type="text" name="lastname">
+                          Carreta
+                        </label>
+                        <input #truck class="mb-0" type="radio" id="truck" name="rrr">
+                        <label class="font-size-12" style="padding: 5px;" type="text" name="lastname">
+                          Truck
+                        </label>
+                      </div>
+                      <div>
+                        <input #valorcheio class="mb-0" type="checkbox" checked id="valorcheio"
+                          name="valorcheio checked">
+                        <label class="font-size-12" style="padding: 2px;" type="text" name="lastname">
+                          Valor cheio
+                        </label>
+                        <br>
+                        <label class="font-size-12" style="padding: 0px; margin-right: 5px;" type="text"
+                          name="lastname">
+                          Entregas
+                        </label>
+                        <select style="padding: 2px;" class="select" id="select1" #select1>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="2">3</option>
+                          <option value="2">4</option>
+                        </select>
+                        <div style="display: flex; align-items: center;">
+                          <label class="font-size-12">
+                            Valor por caixa</label>
+                          <select style="padding: 5px;" class="select" #select2 id="select2">
+                            <option value="1">Caixa</option>
+                            <option value="2">Kg</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card mr-10" style="width: 290px; font-size: 10px;">
+                    <div class="card-body">
+                      <h5 class="card-title">Cálculo do frete manual</h5>
+                      <div>
+                        <label style="margin-right: 5px; font-size: 12px;">
+                          Vlr.Frete</label>
+                        <input #vlrfretecontr style="width: 163px; padding: 5px; font-size: 12px;" name="vlrfretecontr"
+                          size="15" class="mb-0" align="right" id="vlrfretecontr" pattern="[0-9]+([.][0-9]+)?" min="0"
+                          step="any" placeholder="Vlr.Frete contribuíção" type="number" />
+                        <br>
+                        <label style="margin-right: 5px; margin-top: 10px; font-size: 12px;">
+                          Vlr.Descarga</label>
+                        <input #vlrdescarga style="width: 139px; padding: 5px; font-size: 12px;" name="vlrdescarga"
+                          size="20" class="mb-0" align="right" id="vlrdescarga" pattern="[0-9]+([.][0-9]+)?" min="0"
+                          step="any" placeholder="Vlr. Descarga" type="number" />
+                      </div>
+                      <div>
+                        <label style="margin-right: 5px; margin-top: 10px; font-size: 12px;">
+                          Vlr.Distribuíção</label>
+                        <input #vlrdistribuicao style="width: 124px; padding: 5px; font-size: 12px;"
+                          name="vlrdistribuicao" size="20" class="mb-0" align="right" id="vlrdistribuicao"
+                          pattern="[0-9]+([.][0-9]+)?" min="0" step="any" placeholder="Vlr. Distribuíção"
+                          type="number" />
+                        <br>
+                        <label style="margin-right: 5px; margin-top: 10px; font-size: 12px;">
+                          % Sobre o tot.NFs</label>
+                        <input #percsobretotalnf style="width: 110px; padding: 5px; font-size: 12px;"
+                          name="percsobretotalnf" size="20" class="mb-0" align="right" id="percsobretotalnf"
+                          pattern="[0-9]+([.][0-9]+)?" min="0" step="any" placeholder="% sobre tot. NFs."
+                          type="number" />
+                      </div>
+                      <div *ngIf="totalVlrCard4"
+                        style="margin-top: 10px; font-size: 12px; background-color: #FFF3CD; color: #664D03;"
+                        class="alert alert-warning">
+                        {{totalVlrCard4 | currency:'R$'}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card" style="width: 250px; font-size: 10px;">
+                    <div class="card-body">
+                      <h5 class="card-title">Crédito imposto</h5>
+                      <div class="row align-items-start">
+                        <label style="width: 110px; font-size: 12px;">
+                          Alíq.cred.imposto</label>
+                        <input #aliquotacreditoimposto style="width: 74px; font-size: 12px;" name="aliquota" size="10px"
+                          class="mb-0" align="right" id="aliquota" value="9.25" pattern="[0-9]+([.][0-9]+)?" min="0"
+                          step="any" placeholder="Informe a aliquota" type="number" />
+                        <label style="width: 110px; font-size: 12px;">
+                          Alíq.imposto</label>
+                        <input #aliqimpostopercentual style="width: 75px; font-size: 12px;" name="aliqimpostopercentual"
+                          size="20" class="mb-0" align="right" value="12.00" disabled id="aliqimpostopercentual"
+                          pattern="[0-9]+([.][0-9]+)?" min="0" step="any" placeholder="Informe a  Alíquota"
+                          type="number" />
+                        <div style="margin-top: 5px;">
+
+                          <label style="width: 85px; font-size: 12px;">
+                            Placa</label>
+                          <input #placa style="width: 100px; font-size: 12px;" name="placa" size="10" class="mb-0"
+                            align="right" id="placa" maxlength="8" placeholder="Placa" type="text" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                    <ng-container matColumnDef="produto">
+                      <th mat-header-cell *matHeaderCellDef> Produto </th>
+                      <td mat-cell *matCellDef="let element"> {{element.produto}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="descricao">
+                      <th mat-header-cell *matHeaderCellDef> Descrição </th>
+                      <td mat-cell *matCellDef="let element"> {{element.descricao}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="pesounitario">
+                      <th mat-header-cell *matHeaderCellDef> Peso unitario </th>
+                      <td mat-cell *matCellDef="let element"> {{element.pesoun | currency:' '}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="totalpeso">
+                      <th mat-header-cell *matHeaderCellDef> Total Peso </th>
+                      <td mat-cell *matCellDef="let element"> {{element.totalpeso | currency:' ' }} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="freteunitario">
+                      <th mat-header-cell *matHeaderCellDef> Vlr. Frete Unitario </th>
+                      <td mat-cell *matCellDef="let element"> {{element.vlrfreteun | currency:' '}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="fretetotal">
+                      <th mat-header-cell *matHeaderCellDef> Vlr. Frete Total </th>
+                      <td mat-cell *matCellDef="let element"> {{element.vlrfretetotal | currency:' '}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="totalcaixa">
+                      <th mat-header-cell *matHeaderCellDef> Total Caixas </th>
+                      <td mat-cell *matCellDef="let element"> {{element.totaldecaixas}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="valortotal">
+                      <th mat-header-cell *matHeaderCellDef> Vlr. Total </th>
+                      <td mat-cell *matCellDef="let element"> {{element.vlrtotal | currency:' '}} </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    <tr class="mat-row" *matNoDataRow>
+                      <td class="mat-cell" colspan="4">Utlize o filtro para preencher a tabela</td>
+                    </tr>
+                  </table>
+                  <!-- <div  class="card" style="width: 100%; font-size: 10px;"> -->
+                  <div class="card-body">
+                    <div class="row align-items-start">
+                      <tr *ngFor="let produtos of produtos ; let i = index;">
+                        <ng-container *ngIf="i == 0">
+                          <div>
+                            <label style="width: 100px;" style="align: right;" style="font-size: medium;">
+                              Total frete bruto</label>
+                            <input type="text" class="ml-5" style="width: 110px; padding: 50px; margin-right: 25px"
+                              name="totalfretebruto" disabled size="15" style="text-align: right; margin-right: 25px;"
+                              value="{{produtos.totalfretebruto | currency:' '}}" id="totalfretebruto" />
+                            <label style="width: 80px;" style="align: right" style="font-size: medium;">
+                              Total dedução imp.</label>
+                            <input type="text" class="ml-5" style="width: 110px; margin-right: 25px;" disabled size="15"
+                              name="totaldeducaoimp" style="text-align: right; margin-right: 25px;"
+                              value="{{produtos.totaldeducaoimp | currency:' '}}" id="totaldeducaoimp" />
+                            <label style="width: 80px;" style="align: right" style="font-size: medium;">
+                              Total do frete</label>
+                            <input type="text" class="ml-5" style="width: 110px;" disabled size="15" name="vlrfretetotal"
+                              style="text-align: right; margin-right: 25px;"
+                              value="{{produtos.totalfretebruto-produtos.totaldeducaoimp | currency:' '}}"
+                              #vlrfretetotal id="vlrfretetotal" />
+                            <br>
+                            <div style="margin-top: 15px;">
+
+                              <label style="padding: 110px; width: 10px;" style="align: right"
+                                style="font-size: medium;">
+                                Total do peso</label>
+                              <input type="text" class="ml-5" style="width: 80px;" disabled #totalgeralpeso name="totalgeralpeso"
+                                style="text-align: right; margin-right: 25px;"
+                                value="{{produtos.totalgeralpeso |  currency:' '}}" id="totalgeralpeso" />
+                              <label style="width: 80px;" style="align: right" style="font-size: medium;">
+                                Total de caixas</label>
+                              <input type="text" class="ml-5" style="width: 110px; margin-right: 25px;" disabled
+                                name="totalgeralcaixas" size="15" class="mb-0"
+                                style="text-align: right; margin-right: 25px;" value="{{produtos.totalgeralcaixas}}"
+                                #totalgeralcaixas id="totalgeralcaixas" />
+                              <label style="width: 80px;" style="align: right" style="font-size: medium;">
+                                Valor total</label>
+                              <input type="text" class="ml-5" style="width: 110px;" disabled name="vlrtotalgeral"
+                                style="text-align: right;" value="{{produtos.vlrtotalgeral | currency:' '}}"
+                                id="vlrtotalgeral" />
+                            </div>
+                          </div>
+                        </ng-container>
+                      </tr>
+                    </div>
+                  </div>
+                  <!-- </div> -->
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

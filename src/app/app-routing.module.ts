@@ -38,6 +38,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'frete-calcula',
+        loadChildren: () =>
+          import('./logistica/frete-calcula/frete-calcula.module').then(
+            (m) => m.FreteCalculaModule
+          ),
+      },
+      {
         path: 'pedido',
         loadChildren: () =>
           import('./logistica/pedido/pedido.module').then(

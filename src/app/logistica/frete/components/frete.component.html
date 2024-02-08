@@ -15,11 +15,203 @@
       <div class="col-12 col-md-12 col-lg-12">
         <div class="card">
           <div class="card-header">
-            <h4>Card titulo</h4>
+            <h4>Relatorio de pedidos pendentes</h4>
           </div>
-          <div class="card-body">
-            <!-- Add content here -->
+
+          <div class="total-div d-flex">
+            <div class="total-item">
+              <span class="bold">Total Selecionados</span>
+
+              <div class="total-info d-flex space-between">
+                <div>
+                  Peso total
+                </div>
+                <div>
+                  Total de caixas
+                </div>
+                <div>
+                  Valor Total
+                </div>
+              </div>
+              <div class="total-info d-flex space-between">
+                <div class="price">
+                  {{qtdtotalpesopedido | currency:' '}}
+                </div>
+                <div class="price">
+                  {{qtdtotalcaixapedido | currency:' '}}
+                </div>
+                <div class="price">
+                  {{vlrtotalgeralpedido | currency:' '}}
+                </div>
+              </div>
+            </div>
+            <div class="total-item">
+              <span class="bold">Valor total</span>
+              <div class="total-info d-flex space-between">
+                <span>Peso total</span>
+                <span>Total de caixas</span>
+                <span>Valor Total</span>
+              </div>
+              <div class="total-info d-flex space-between">
+                <div class="price">
+                  {{qtdtotalpesogeralpedido | currency:' '}}
+                </div>
+                <div class="price">
+                  {{qtdtotalcaixageralpedido | currency:' '}}
+                </div>
+                <div class="price">
+                  {{vlrtotalgeralgeralpedido | currency:' '}}
+                </div>
+              </div>
+            </div>
           </div>
+
+          <div class="color-info">
+            <div class="d-flex align-center">
+              <span class="bold mr-7 white">D.Estado</span>
+              <div class="card-green"></div>
+            </div>
+            <div class="d-flex align-center">
+              <span class="bold mr-7 white">F.Estado</span>
+              <div class="card-yellow"></div>
+            </div>
+            <div class="d-flex align-center">
+              <span class="bold mr-7 white">S.Agua</span>
+              <div class="card-white"></div>
+            </div>
+          </div>
+          <div class="card-body mt-25">
+            <div class="row">
+              <div class="col-sm-12">
+
+                <div class="d-flex space-between">
+                  <input placeholder="Pesquisar por cidade, cliente e etc" type="text" class="form-control w-50"
+                    (keyup)="applyFilter($event)">
+                  <!-- <input placeholder="Cidade" type="text" class="form-control w-25 mr-7" (keyup)="applyFilter($event)">
+                  <input placeholder="Cliente" type="text" class="form-control w-25" (keyup)="applyFilter($event)"> -->
+                  <!-- <button [disabled]="form.invalid" (click)="submit()" class="bnt-search" mat-fab extended
+                    color="primary">
+                    <mat-icon>search</mat-icon>
+                    MOSTRAR
+                  </button> -->
+                  <div>
+                    <button [disabled]="form.invalid" (click)="calculaFrete('2', vlrtotalgeralpedido)" class="bnt-search mr-7" mat-fab extended
+                      color="warn">
+                      Calcular
+                    </button>
+                    <button [disabled]="form.invalid" (click)="enviaPedidoParaComercial()" class="bnt-search" mat-fab extended
+                      color="warn">
+                      Enviar p/Com.
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <ng-container matColumnDef="sel">
+              <th mat-header-cell *matHeaderCellDef> Sel. </th>
+              <td mat-cell *matCellDef="let row">
+
+                <mat-checkbox #customCheck1 id="customCheck1" (click)="trackByFn(row.numped,
+                           row.vlrpedido,
+                           row.peso,
+                           row.qtdcaixa,
+                           customCheck1.checked,
+                           row.tpfrete)"></mat-checkbox>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="as">
+              <th mat-header-cell *matHeaderCellDef> A/S </th>
+              <td mat-cell *matCellDef="let row">
+                <div [ngClass]="{'bg-green': setAgua(row.categoria) == 'DE'}">
+                </div>
+                <div [ngClass]="{'bg-yellow': setAgua(row.categoria) == 'FE'}">
+                </div>
+                <div [ngClass]="{'bg-white': setAgua(row.categoria) !== 'DE' && setAgua(row.categoria) !== 'FE'}">
+                </div>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="tpfr">
+              <th mat-header-cell *matHeaderCellDef> Tp.Fr </th>
+              <td mat-cell *matCellDef="let element"> {{element.tpfrete}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="fifo">
+              <th mat-header-cell *matHeaderCellDef> Fifo </th>
+              <td mat-cell *matCellDef="let element"> {{element.fifo}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="ret">
+              <th mat-header-cell *matHeaderCellDef> Ret </th>
+              <td mat-cell *matCellDef="let element"> {{element.retirar}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="entrega">
+              <th mat-header-cell *matHeaderCellDef> Entrega </th>
+              <td mat-cell *matCellDef="let element"> {{element.entrega}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="dtag">
+              <th mat-header-cell *matHeaderCellDef> Dta.Ag </th>
+              <td mat-cell *matCellDef="let element"> {{element.dtaentregaagendada}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="nped">
+              <th mat-header-cell *matHeaderCellDef> Nped </th>
+              <td mat-cell *matCellDef="let element"> {{element.numped}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="pvend">
+              <th mat-header-cell *matHeaderCellDef> PVend </th>
+              <td mat-cell *matCellDef="let element"> {{element.pedvenda}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="peso">
+              <th mat-header-cell *matHeaderCellDef> Peso </th>
+              <td mat-cell *matCellDef="let element"> {{element.peso}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="cdcli">
+              <th mat-header-cell *matHeaderCellDef> Cd.Cli </th>
+              <td mat-cell *matCellDef="let element"> {{element.codcli}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="razaosocial">
+              <th mat-header-cell *matHeaderCellDef> Razão Social </th>
+              <td mat-cell *matCellDef="let element"> {{element.razaosocial}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="nomecidade">
+              <th mat-header-cell *matHeaderCellDef> Cidade </th>
+              <td mat-cell *matCellDef="let element"> {{element.nomecidade}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="dtped">
+              <th mat-header-cell *matHeaderCellDef> Dt.Ped </th>
+              <td mat-cell *matCellDef="let element"> {{element.datafat}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="op">
+              <th mat-header-cell *matHeaderCellDef> Op </th>
+              <td mat-cell *matCellDef="let element"> {{element.tipo}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="qtdcaixa">
+              <th mat-header-cell *matHeaderCellDef> Qtd.Caixa </th>
+              <td mat-cell *matCellDef="let element"> {{element.qtdcaixa}} </td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="vlrpedido">
+              <th mat-header-cell *matHeaderCellDef class="pr-5">Vlr.Pedido </th>
+              <td mat-cell *matCellDef="let element"> {{element.vlrpedido}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
         </div>
       </div>
     </div>
